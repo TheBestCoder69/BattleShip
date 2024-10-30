@@ -1,25 +1,47 @@
 import numpy as np
 
-# Sets up board
-board = np.array([[0] * 5] * 5)
+def battleShip():
+    # Varibles
+    hit = False
+    shots = 0
 
-# Gets random X and Y for the ship
-shipX = np.random.randint(0, 5)
-shipY = np.random.randint(0, 5)
+    x, y = map(int, input("Type in the X and Y you want to give the board").split())
 
-# Places ship in a random area in the "ocean"
-board[shipX, shipY] = 1
+    # Creates a 2d array called "Board"
+    board = np.array([[0] * x] * y, dtype=str)
 
-#User input for target location
-x = int(input("x point of target"))
-y = int(input("y point of target"))
+    # Randomly sets the Ships X and Y 
+    shipX = np.random.randint(0, x)
+    shipY = np.random.randint(0, y)
 
-def tableSetup():
-    print(board)
+    # Places the Ship at the random X and Y 
+    board[shipX, shipY] = 1
 
-tableSetup()
+    while hit == False:
 
-if (board[x,y]==1):
-    print("HIT")
-else:
-    print("Miss")
+        # Asks the User where they should deploy the Bomb
+        userX, userY = map(int, input("Type in the X and Y you want to lauch the Bomb: ").split())
+
+        shots += 1
+
+        print(board)
+
+        if board[userX, userY] == "1":
+            print("HIT")
+            hit = True
+        else:
+            print("MISS")
+            board[userX, userY] = "X"
+            print(board)
+
+
+
+battleShip()
+
+
+
+
+
+
+
+
